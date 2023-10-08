@@ -33,25 +33,25 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Build Docker image
-      run: |
-        docker build -t alotropo/django .
-        docker tag alotropo/django alotropo/django:latest
-        docker build -t alotropo/nginx ./nginx
-        docker tag alotropo/nginx alotropo/nginx:latest
+    # - name: Build Docker image
+    #   run: |
+    #     docker build -t alotropo/django .
+    #     docker tag alotropo/django alotropo/django:latest
+    #     docker build -t alotropo/nginx ./nginx
+    #     docker tag alotropo/nginx alotropo/nginx:latest
 
 
 
-    - name: Push Docker image to registry
-      run: |
-        echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-        docker push alotropo/django:latest
-        docker push alotropo/nginx:latest
+    # - name: Push Docker image to registry
+    #   run: |
+    #     echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    #     docker push alotropo/django:latest
+    #     docker push alotropo/nginx:latest
 
     - name: Deploy to Ubuntu Server
       run: |
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key.pem
+        echo "${{ secrets.SECRET_KEY }}" > ssh_key.pem
         chmod 600 ssh_key.pem
         ssh -i ssh_key.pem ${{ secrets.USER }}@${{ secrets.SSH_HOST }} "echo fazendo alguns testes"
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.SECRET_KEY }}
