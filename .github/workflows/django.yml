@@ -35,7 +35,7 @@ jobs:
       with:
         host: 192.168.15.4
         username: alotropo
-        key: ${{ secrets.KEY_MRPLATO }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: | 
          ls -la
