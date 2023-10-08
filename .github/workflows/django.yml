@@ -30,15 +30,15 @@ jobs:
     # needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.USER }}
-        password: "alotropo"
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          ls -la
+    # - name: Checkout code
+    #   uses: appleboy/ssh-action@v1.0.0
+    #   with:
+    #     host: ${{ secrets.SSH_HOST }}
+    #     username: ${{ secrets.USER }}
+    #     password: "alotropo"
+    #     port: ${{ secrets.SSH_PORT }}
+    #     script: |
+    #       ls -la
 
     - name: Deploy to Ubuntu Servers
       run: |
