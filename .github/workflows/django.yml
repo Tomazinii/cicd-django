@@ -44,8 +44,6 @@ jobs:
         docker push alotropo/django:latest
         docker push alotropo/nginx:latest
 
-    - name: Deploy to Ubuntu Server
-
     - name: Checkout code
       uses: appleboy/ssh-action@master
       with:
