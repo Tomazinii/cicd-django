@@ -38,8 +38,4 @@ jobs:
 
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      # Configure as credenciais do SSH
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
