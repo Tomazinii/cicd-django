@@ -40,13 +40,13 @@ jobs:
     #     script: |
     #       ls -la
 
-    - name: Deploy to Ubuntu Servers
-      run: |
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
-        chmod 600 ssh_key
-        ssh -i ssh_key alotropo@192.168.15.4 "echo fazendo alguns testes"
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    # - name: Deploy to Ubuntu Servers
+    #   run: |
+    #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
+    #     chmod 600 ssh_key
+    #     ssh -i ssh_key alotropo@192.168.15.4 "echo fazendo alguns testes"
+    #   env:
+    #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Deploy to Ubuntu 2222
       run: |
