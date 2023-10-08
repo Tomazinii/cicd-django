@@ -1,7 +1,7 @@
 {
     "files.exclude": {
-        "**/.kanbn": false,
-        "**/.pytest_cache": false,
-        ".vscode": false
+        "**/.kanbn": true,
+        "**/.pytest_cache": true,
+        ".vscode": true
     }
 }

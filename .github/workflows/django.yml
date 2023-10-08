@@ -6,7 +6,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
@@ -26,3 +25,27 @@ jobs:
     - name: Run Tests
       run: |
         pytest
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      run: |
+        docker build -t alotropo/django .
+        docker tag alotropo/django alotropo/django:latest
+        docker build -t alotropo/nginx ./nginx
+        docker tag alotropo/nginx alotropo/nginx:latest
+
+
+
+    - name: Push Docker image to registry
+      run: |
+        echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        docker push alotropo/django:latest
+        docker push alotropo/nginx:latest
+
+    - name: Deploy to Ubuntu Server
+      run: |
+        ssh ${{ secrets.DOCKERHUB_USERNAME }}@${{ secrets.SSH_HOT }}  "echo fazendo alguns testes"
