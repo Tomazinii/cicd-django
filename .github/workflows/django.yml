@@ -25,34 +25,35 @@ jobs:
     - name: Run Tests
       run: |
         pytest
-  deploy:
-    name: CD
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+
+  # deploy:
+  #   name: CD
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
   
-    - name: Build Docker image
-      run: |
-        docker build -t alotropo/django .
-        docker tag alotropo/django alotropo/django:latest
-        docker build -t alotropo/nginx ./nginx
-        docker tag alotropo/nginx alotropo/nginx:latest
+  #   - name: Build Docker image
+  #     run: |
+  #       docker build -t alotropo/django .
+  #       docker tag alotropo/django alotropo/django:latest
+  #       docker build -t alotropo/nginx ./nginx
+  #       docker tag alotropo/nginx alotropo/nginx:latest
 
-    - name: Push Docker image to registry
-      run: |
-        echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-        docker push alotropo/django:latest
-        docker push alotropo/nginx:latest
+  #   - name: Push Docker image to registry
+  #     run: |
+  #       echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+  #       docker push alotropo/django:latest
+  #       docker push alotropo/nginx:latest
 
-    - name: Checkout code
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: | 
-         ls -la
+  #   - name: Checkout code
+  #     uses: appleboy/ssh-action@master
+  #     with:
+  #       host: ${{ secrets.SSH_HOST }}
+  #       username: ${{ secrets.USER }}
+  #       key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #       port: ${{ secrets.SSH_PORT }}
+  #       script: | 
+  #        ls -la
 
 
 
