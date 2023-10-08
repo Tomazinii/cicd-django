@@ -27,7 +27,7 @@ jobs:
   #       pytest
   deploy:
     name: CD
-    # needs: build
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -40,7 +40,22 @@ jobs:
         script: |
           ls -la
 
-    - name: Deploy to Ubuntu Servers
+    # - name: Build Docker image
+    #   run: |
+    #     docker build -t alotropo/django .
+    #     docker tag alotropo/django alotropo/django:latest
+    #     docker build -t alotropo/nginx ./nginx
+    #     docker tag alotropo/nginx alotropo/nginx:latest
+
+
+
+    # - name: Push Docker image to registry
+    #   run: |
+    #     echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    #     docker push alotropo/django:latest
+    #     docker push alotropo/nginx:latest
+
+    - name: Deploy to Ubuntu Server
       run: |
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
         chmod 600 ssh_key
