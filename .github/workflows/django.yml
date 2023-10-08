@@ -33,10 +33,10 @@ jobs:
     - name: Checkout code
       uses: appleboy/ssh-action@master
       with:
-        host: 192.168.15.4
-        username: alotropo
-        password: alotropo
-        port: 22
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PORT }}
         script: |
           ls -la
 
