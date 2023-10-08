@@ -25,33 +25,21 @@ jobs:
   #   - name: Run Tests
   #     run: |
   #       pytest
-  deploy:
-    name: CD
-    # needs: build
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest  # Escolha o sistema operacional adequado
+
     steps:
-    # - name: Checkout code
-    #   uses: appleboy/ssh-action@v1.0.0
-    #   with:
-    #     host: ${{ secrets.SSH_HOST }}
-    #     username: ${{ secrets.USER }}
-    #     password: "alotropo"
-    #     port: ${{ secrets.SSH_PORT }}
-    #     script: |
-    #       ls -la
+    - name: Checkout do código
+      uses: actions/checkout@v2  # Para obter o código do repositório
 
-    # - name: Deploy to Ubuntu Servers
-    #   run: |
-    #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
-    #     chmod 600 ssh_key
-    #     ssh -i ssh_key alotropo@192.168.15.4 "echo fazendo alguns testes"
-    #   env:
-    #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-
-    - name: Deploy to Ubuntu 2222
+    - name: SSH para o servidor e execute o comando
       run: |
-        ssh -oStrictHostKeyChecking=no -v alotropo@192.168.15.4 "echo qwewqeewqweqewq"
+        ssh alotropo@192.168.15.4 'echo "fazendo um teste"'
 
-
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      # Configure as credenciais do SSH
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
 
