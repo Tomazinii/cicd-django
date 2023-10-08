@@ -33,7 +33,7 @@ jobs:
     - name: Execute comands SSH
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.SSH_HOST }}
+        host: ${{ secrets.SSH_HOT }}
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         key: ${{ secrets.SECRET_KEY }}
         port: ${{ secrets.SSH_PORT }}
