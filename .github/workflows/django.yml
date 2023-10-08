@@ -33,10 +33,10 @@ jobs:
     - name: Checkout code
       uses: appleboy/ssh-action@master
       with:
-        host: 200.137.197.240
-        username: cedric
+        host: 192.168.15.4
+        username: alotropo
         key: ${{ secrets.KEY_MRPLATO }}
-        port: 30240
+        port: 22
         script: | 
          ls -la
 
