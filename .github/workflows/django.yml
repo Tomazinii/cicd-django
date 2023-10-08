@@ -34,8 +34,6 @@ jobs:
 
     - name: SSH para o servidor e execute o comando
       run: |
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
-        chmod 600 ssh_key
-        ssh -i ssh_key alotropo@192.168.15.4 "echo fazendo alguns testes"
+        echo "alotropo" | ssh alotropo@192.168.15.4 'sudo -S echo "fazendo um teste"'
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
