@@ -30,7 +30,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-  
+   
+   
     - name: Build Docker image
       run: |
         docker build -t alotropo/django .
