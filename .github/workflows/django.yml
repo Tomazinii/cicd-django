@@ -28,7 +28,7 @@ jobs:
 
   docker_build:
     name: docker_build
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Build Docker image
@@ -51,7 +51,6 @@ jobs:
     needs: docker_build
     runs-on: ubuntu-latest
     steps:
-
     - name: Checkout code
       uses: appleboy/ssh-action@master
       with:
