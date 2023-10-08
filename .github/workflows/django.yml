@@ -35,7 +35,7 @@ jobs:
       with:
         host: 192.168.15.4
         username: alotropo
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        password: alotropo
         port: 22
         script: |
           ls -la
