@@ -25,15 +25,17 @@ jobs:
   #   - name: Run Tests
   #     run: |
   #       pytest
-  build:
-    runs-on: ubuntu-latest  # Escolha o sistema operacional adequado
-
+  deploy:
+    name: CD
+    needs: build
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout do código
-      uses: actions/checkout@v2  # Para obter o código do repositório
-
-    - name: SSH para o servidor e execute o comando
-      run: |
-        echo "alotropo" | ssh alotropo@192.168.15.4 'sudo -S echo "fazendo um teste"'
-      env:
-        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+    - name: Checkout code
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          ls -la
