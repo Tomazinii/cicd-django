@@ -27,11 +27,18 @@ jobs:
         pytest
   deploy:
     name: CD
-    runs-on: ubuntu-latest
     needs: build
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          ls -la
 
     # - name: Build Docker image
     #   run: |
@@ -48,10 +55,10 @@ jobs:
     #     docker push alotropo/django:latest
     #     docker push alotropo/nginx:latest
 
-    - name: Deploy to Ubuntu Server
-      run: |
-        echo "${{ secrets.SECRET_KEY }}" > ssh_key
-        chmod 600 ssh_key
-        ssh -i ssh_key ${{ secrets.USER }}@${{ secrets.SSH_HOST }} "echo fazendo alguns testes"
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SECRET_KEY }}
+    # - name: Deploy to Ubuntu Server
+    #   run: |
+    #     echo "${{ secrets.SECRET_KEY }}" > ssh_key
+    #     chmod 600 ssh_key
+    #     ssh -i ssh_key alotropo@ "echo fazendo alguns testes"
+    #   env:
+    #     SSH_PRIVATE_KEY: ${{ secrets.SECRET_KEY }}
