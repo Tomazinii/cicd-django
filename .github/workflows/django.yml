@@ -36,13 +36,13 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Transferir docker-compose.yml para o servidor
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
-          SSH_USERNAME: ${{ secrets.USER }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          scp -i $SSH_PRIVATE_KEY -P $SSH_PORT docker-compose.yml $SSH_USERNAME@$SSH_HOST:/home/cedric/
+      env:
+        SSH_HOST: ${{ secrets.SSH_HOST }}
+        SSH_PORT: ${{ secrets.SSH_PORT }}
+        SSH_USERNAME: ${{ secrets.USER }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        scp -i $SSH_PRIVATE_KEY -P $SSH_PORT docker-compose.yml $SSH_USERNAME@$SSH_HOST:/home/cedric/
 
 
     - name: Build Docker image
