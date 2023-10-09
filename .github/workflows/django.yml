@@ -34,17 +34,23 @@ jobs:
 
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Deploy via SSH
-      uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.USER }} # Se necessário
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: ${{ secrets.SSH_PORT }} # Se necessário
-        script: |
-            scp docker-compose.yml -p 30240 cedric@${{ secrets.SSH_HOST }}:/home/cedric
+        ref: main
 
+    - name: Deploy to server
+      uses: easingthemes/ssh-action@master
+      with:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        ARGS: "-rltgoDzv"
+        REMOTE_HOST: ${{ secrets.SSH_HOST }} 
+        REMOTE_USER: ${{ secrets.SSH_HOST }}
+        REMOTE_PORT: ${{ secrets.SSH_PORT }}
+        TARGET: /home/cedric/django
+        
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: main
 
     - name: Build Docker image
       run: |
