@@ -5,30 +5,30 @@ on:
     branches: [ "main" ]
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     max-parallel: 4
-  #     matrix:
-  #       python-version: [3.8]
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.8]
 
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: Set up Python ${{ matrix.python-version }}
-  #     uses: actions/setup-python@v3
-  #     with:
-  #       python-version: ${{ matrix.python-version }}
-  #   - name: Install Dependencies
-  #     run: |
-  #       python -m pip install --upgrade pip
-  #       pip install -r requirements.txt
-  #   - name: Run Tests
-  #     run: |
-  #       pytest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Tests
+      run: |
+        pytest
         
   deploy:
     name: CD
-    # needs: build
+    needs: build
     runs-on: ubuntu-latest
     steps:
 
@@ -78,7 +78,7 @@ jobs:
         envs: USER_PASS
 
         script: | 
-                echo $USER_PASS | sudo -S docker pull alotropo/django:latest && docker-compose -f docker-compose.yml up -d
+                echo $USER_PASS | sudo -S cd /home/cedric/django && docker-compose up -d
 
 
 
