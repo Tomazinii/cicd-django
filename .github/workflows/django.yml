@@ -52,7 +52,7 @@ jobs:
     - name: Checkout code
       uses: appleboy/ssh-action@master
       env:
-        USER_PASS: ${{ secrets.USER_PASSWORD }}
+        USER_PASS: "${{ secrets.USER_PASSWORD }}"
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.USER }}
