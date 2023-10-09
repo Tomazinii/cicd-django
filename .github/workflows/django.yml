@@ -43,7 +43,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }} # Se necessário
         script: |
-            scp docker-compose.yml cedric@${{ secrets.SSH_HOST }}:/home/cedric
+            scp docker-compose.yml -p 30240 cedric@${{ secrets.SSH_HOST }}:/home/cedric
 
 
     - name: Build Docker image
