@@ -35,11 +35,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       with:
-      
+
         ref: main
 
     - name: Deploy to server
-      uses: easingthemes/ssh-deploy@master
+      uses: easingthemes/ssh-deploy@v4.1.9
       with:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         ARGS: "-rltgoDzv"
