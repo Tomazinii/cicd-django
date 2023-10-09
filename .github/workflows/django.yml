@@ -42,7 +42,7 @@ jobs:
         SSH_USERNAME: ${{ secrets.USER }}
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       run: |
-        scp -i $SSH_PRIVATE_KEY -P $SSH_PORT docker-compose.yml $SSH_USERNAME@$SSH_HOST:/home/cedric/
+        scp -i $SSH_PRIVATE_KEY -p $SSH_PORT docker-compose.yml $SSH_USERNAME@$SSH_HOST:/home/cedric/
 
 
     - name: Build Docker image
