@@ -34,7 +34,7 @@ jobs:
 
     - name: Checkout code
       uses: actions/checkout@v2
-      
+
 
     # - name: Build Docker image
     #   run: |
@@ -59,7 +59,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: | 
-                 echo keekaiy7ie | sudo -S docker ps
+                 echo $USER_PASS | sudo -S docker ps
 
 
 
