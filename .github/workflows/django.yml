@@ -59,6 +59,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
         envs: USER_PASS
+        
         script: | 
                 echo $USER_PASS | sudo -S docker pull alotropo/django:latest && docker-compose -f ./docker-compose.yml up -d
 
